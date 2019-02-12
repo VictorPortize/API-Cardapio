@@ -1,0 +1,19 @@
+{
+  "name": "api-cardapio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "César Augusto",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.4.11",
+    "restify": "^7.7.0"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.3.12",
+    "@types/restify": "^7.2.7"
+  }
+}

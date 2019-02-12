@@ -1,0 +1,1 @@
+Iniciar o mongo nessa pasta. usando o comando  --db-path=./data/db
