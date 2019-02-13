@@ -22,18 +22,31 @@ class CardapioRouter{
         application.post('/cardapios',(req,resp,next) =>{
             let cardapio = new Cardapio(req.body)
             let file = req.files.foto_prato
-            fs.readFile(file.path,(err, data)=> {
-                cardapio.foto_prato ={filename:'foto_prato',img:data}
-                cardapio.save()
-                .then(document => {
-                    if(document){
-                        resp.json(document)
-                    }else{
-                        next(400)
-                    }
-                    return next()
+            console.log(file)
+            if(file != undefined){
+                fs.readFile(file.path,(err, data)=> {
+                    cardapio.foto_prato ={filename:'foto_prato',img:data}
+                    cardapio.save()
+                    .then(document => {
+                        if(document){
+                            resp.json(document)
+                        }else{
+                            next(400)
+                        }
+                        return next()
+                    })
                 })
-            })
+            }else{
+                cardapio.save()
+                    .then(document => {
+                        if(document){
+                            resp.json(document)
+                        }else{
+                            next(400)
+                        }
+                        return next()
+                    })
+            }
         })
     }
 }

@@ -22,8 +22,23 @@ var CardapioRouter = /** @class */ (function () {
         application.post('/cardapios', function (req, resp, next) {
             var cardapio = new cardapio_model_1.Cardapio(req.body);
             var file = req.files.foto_prato;
-            fs.readFile(file.path, function (err, data) {
-                cardapio.foto_prato = { filename: 'foto_prato', img: data };
+            console.log(file);
+            if (file != undefined) {
+                fs.readFile(file.path, function (err, data) {
+                    cardapio.foto_prato = { filename: 'foto_prato', img: data };
+                    cardapio.save()
+                        .then(function (document) {
+                        if (document) {
+                            resp.json(document);
+                        }
+                        else {
+                            next(400);
+                        }
+                        return next();
+                    });
+                });
+            }
+            else {
                 cardapio.save()
                     .then(function (document) {
                     if (document) {
@@ -34,7 +49,7 @@ var CardapioRouter = /** @class */ (function () {
                     }
                     return next();
                 });
-            });
+            }
         });
     };
     return CardapioRouter;
